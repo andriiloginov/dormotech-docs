@@ -89,6 +89,32 @@ def check_pdf():
     return problems, "pdf: page boxes correct, only Instrument Sans embedded, both formats present"
 
 
+def pending_tokens():
+    """Token values that are standing in for a real one nobody has supplied.
+
+    Any key named `$<something>Pending` in a token file is surfaced by the
+    build, so a provisional value cannot quietly become permanent just
+    because the page renders.
+    """
+    found = []
+    for path in sorted((ROOT / "tokens").glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+
+        def walk(node, trail):
+            if isinstance(node, dict):
+                for k, v in node.items():
+                    if k.startswith("$") and k.endswith("Pending"):
+                        found.append(f"{path.name}: {v}")
+                    else:
+                        walk(v, trail + [k])
+            elif isinstance(node, list):
+                for v in node:
+                    walk(v, trail)
+
+        walk(data, [])
+    return found
+
+
 def run_all():
     failed = 0
     for fn in (check_palette, check_glyphs, check_pdf):

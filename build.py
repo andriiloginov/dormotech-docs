@@ -46,11 +46,16 @@ def main(src):
     DIST.mkdir(exist_ok=True)
 
     failures = 0
+    unsourced = []
     with sync_playwright() as p:
         browser = p.chromium.launch()
         for fmt, spec in tokens.formats().items():
             html_path = DIST / f"{name}-{fmt}.html"
-            html_path.write_text(render(doc, fmt), encoding="utf-8")
+            html, warnings = render(doc, fmt)
+            html_path.write_text(html, encoding="utf-8")
+            for w in warnings:
+                if w not in unsourced:
+                    unsourced.append(w)
 
             tab = browser.new_page()
             tab.goto(html_path.as_uri())
@@ -84,6 +89,16 @@ def main(src):
 
     print("\nchecks:")
     failures += checks.run_all()
+
+    # Unsourced content is a content state, not a build defect — the pages are
+    # correct, they just don't carry copy nobody has supplied yet. It is
+    # reported here rather than drawn on the page, because a placeholder box
+    # has no place in the design system and can reach a customer.
+    unsourced += checks.pending_tokens()
+    if unsourced:
+        print("\nNOT READY TO SHIP — unsourced content:")
+        for w in unsourced:
+            print(f"  - {w}")
 
     if failures:
         print(f"\n{failures} problem(s) — fix before shipping.")

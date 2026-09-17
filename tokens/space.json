@@ -23,7 +23,8 @@
     "indent": 23
   },
   "rules": {
-    "hairline": 1
+    "hairline": 1.5,
+    "$note": "Divider weight. 1.5 is a starting value — confirm against the Figma stroke."
   },
   "$radiusNote": "Card radius is 9, not larger. Containers frequently sit side by side and a big radius reads badly when two rounded edges meet."
 }

@@ -110,8 +110,6 @@ def block(b, fmt):
         return f'<div class="refs"><div class="label">References</div><div class="grid">{cells}</div></div>'
     if kind == "legend":
         return f'<div class="legend">{cite(b["text"])}</div>'
-    if kind == "placeholder":
-        return f'<div class="placeholder"><b>{esc(b["label"])}</b>{esc(b["note"])}</div>'
     if kind == "spacer":
         return '<div class="spacer"></div>'
     raise ValueError(f"unknown block kind: {kind}")
@@ -147,36 +145,36 @@ def header(h, doc):
     return f'<div class="{cls}">{top}{title}{sub}</div>'
 
 
-def _stat(reg, claim_id):
+def _stat(reg, claim_id, warnings):
     """The stat callout is opt-in, and deliberately has no default.
 
     A clinical claim belongs to the study it came from and the population it
     describes. Rendering one just because the footer has room for it is
-    exactly the mistake §compliance warns about, so a document that does not
-    name a claim simply gets no stat — not a placeholder asking someone to
-    fill the gap.
+    exactly the mistake the compliance rules warn about, so a document that
+    does not name a claim simply gets no stat.
     """
     if not claim_id:
         return ""
     claim = next((c for c in reg["claims"].get("claims", []) if c["id"] == claim_id), None)
     if not claim or claim.get("value") is None:
-        # The document DID ask for this claim, so the gap is real.
-        return ('<div class="placeholder"><b>Stat — pending</b>'
-                f'{esc(claim_id)} has no value in content/regulatory/claims.json</div>')
+        # The document DID ask for this claim, so the gap is real — but it is
+        # reported to whoever is building, never drawn on the page.
+        warnings.append(f"footer stat '{claim_id}' has no value in content/regulatory/claims.json")
+        return ""
     return (f'<div class="stat"><span class="value">{esc(claim["value"])}</span>'
             f'<span class="caption">{esc(claim.get("caption", ""))}</span></div>')
 
 
-def _strip(reg):
+def _strip(reg, warnings):
     labels = reg["strip"].get("labels") or []
     if not labels:
-        return ('<div class="placeholder"><b>Regulatory strip — pending</b>'
-                'content/regulatory/strip.json</div>')
+        warnings.append("regulatory strip is unsourced — content/regulatory/strip.json")
+        return ""
     parts = '<i class="sep"></i>'.join(f"<span>{esc(l)}</span>" for l in labels)
     return f'<div class="strip">{parts}</div>'
 
 
-def footer(f, doc, reg):
+def footer(f, doc, reg, warnings):
     """Three groups running left to right on an even gap — wordmark, stat,
     regulatory strip. This mirrors the approved footer (Figma 2561:4917,
     52pt tall: wordmark at x=18, stat at x=175, strip at x=347). It is not a
@@ -197,31 +195,45 @@ def footer(f, doc, reg):
         return f'<div class="{cls}">{wordmark()}</div>'
 
     if variant == "legal":
-        text = (f'<p class="indications">{esc(f["indications"])}</p>' if f.get("indications")
-                else '<div class="placeholder"><b>Indications for use — pending</b>'
-                     'content/regulatory/indications.md</div>')
+        if f.get("indications"):
+            text = f'<p class="indications">{esc(f["indications"])}</p>'
+        else:
+            # A legal footer exists to carry this paragraph. Missing, the
+            # document is not shippable — but the page stays clean and the
+            # build says so.
+            warnings.append("legal footer has no indications paragraph — "
+                            "content/regulatory/indications.md")
+            text = ""
         return f'<div class="{cls}">{wordmark()}{text}<div class="qr"></div></div>'
 
     return (f'<div class="{cls}">{wordmark()}'
-            f'{_stat(reg, f.get("stat"))}{_strip(reg)}</div>')
+            f'{_stat(reg, f.get("stat"), warnings)}{_strip(reg, warnings)}</div>')
 
 
 # -------------------------------------------------------------------- page --
 
-def page(p, doc, fmt, reg):
+def page(p, doc, fmt, reg, warnings):
     if p.get("role") == "outro":
         tag = f'<p class="lead">{esc(p["tagline"])}</p>' if p.get("tagline") else ""
         return f'<div class="page {fmt} outro"><div class="mark">{wordmark()}{tag}</div></div>'
     body = "".join(block(b, fmt) for b in p.get("blocks", []))
     return (f'<div class="page {fmt}">{header(p.get("header"), doc)}'
-            f'<div class="body">{body}</div>{footer(p.get("footer"), doc, reg)}</div>')
+            f'<div class="body">{body}</div>{footer(p.get("footer"), doc, reg, warnings)}</div>')
 
 
 def render(doc, fmt):
+    """Returns (html, warnings).
+
+    Unsourced content is never drawn on the page — no dashed boxes, no
+    "pending" labels. There is no such treatment in the design system, and a
+    placeholder on a page can reach a customer. Gaps are reported to whoever
+    is running the build instead.
+    """
     reg = _regulatory()
+    warnings = []
     css = (ROOT / "styles" / "components.css").read_text(encoding="utf-8")
-    pages = "\n".join(page(p, doc, fmt, reg) for p in doc["pages"])
-    return f"""<!doctype html>
+    pages = "\n".join(page(p, doc, fmt, reg, warnings) for p in doc["pages"])
+    html_out = f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
 <title>{esc(doc['title'])} — {fmt.upper()}</title>
@@ -233,3 +245,4 @@ def render(doc, fmt):
 </head><body>
 {pages}
 </body></html>"""
+    return html_out, warnings

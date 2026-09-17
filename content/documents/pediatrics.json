@@ -135,11 +135,6 @@
             "Withers A, et al. Comparison of home ambulatory type 2 polysomnography with in-laboratory type 1 polysomnography for the diagnosis of obstructive sleep apnea in children. J Clin Sleep Med. 2022;18(2):393-402. doi:10.5664/jcsm.9576.",
             "Russo K, Greenhill J, Burgess S. Home Level 2 polysomnography is feasible in children with suspected sleep disorders. Sleep Med. 2021;88:157-161. doi:10.1016/j.sleep.2021.10.024."
           ]
-        },
-        {
-          "kind": "placeholder",
-          "label": "FDA disclaimer block — pending",
-          "note": "Empty in the source material. Must be reproduced verbatim from content/regulatory/indications.md or the Figma legal footer component — never drafted here."
         }
       ],
       "footer": {

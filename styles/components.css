@@ -40,8 +40,8 @@ body {
 
 /* -------------------------------------------------------------- header --
  * Variants: .compact (no subheader) | default (with subheader) | .split
- * Themes:   default (light tint)    | .dark
- * Pick one theme per document and hold it. */
+ * Grounds:  default (white) | .tint | .dark — white unless chosen otherwise.
+ * Pick one per document and hold it. */
 
 /* The header ground is plain white. The tinted and dark grounds exist as
  * opt-in variants — apply one deliberately, never by default. */
@@ -127,7 +127,7 @@ body {
 .body > * { flex: 0 0 auto; }
 
 /* Pushes everything after it to the bottom of the body. Deliberately zero
- * height — the collapse check in scripts/build.mjs skips it by class. */
+ * height — the collapse check in build.py skips it by class. */
 .spacer { margin-top: auto; }
 
 /* --------------------------------------------------------------- text -- */
@@ -251,28 +251,6 @@ ul.highlight li.on { background: var(--color-lime); border-radius: var(--radius-
 .refs .grid p { flex: 1 1 0; font-size: var(--type-reference-size); line-height: var(--type-reference-line); color: var(--color-ink-soft); }
 .refs .n { font-weight: 700; color: var(--color-forest); }
 
-/* -------------------------------------------------------- placeholder --
- * For content that MUST come from the live component or the brand owner and
- * is not yet available — regulatory wording above all. Deliberately visible:
- * a missing compliance block should be obvious in the render, never silent. */
-
-.placeholder {
-  border: var(--rule-hairline) dashed var(--color-rule-strong);
-  border-radius: var(--radius-button);
-  padding: 5pt 8pt;
-  color: var(--color-ink-soft);
-  font-size: 7.5pt;
-  line-height: 10pt;
-}
-.placeholder b {
-  display: block;
-  font-size: 7pt;
-  letter-spacing: 0.9pt;
-  text-transform: uppercase;
-  margin-bottom: 1pt;
-  opacity: 0.75;
-}
-
 /* -------------------------------------------------------------- footer --
  * Heights: .minimal 30 | default 52 | .legal 132 | .legal.with-image 146
  * Themes:  default forest | .lime | .black | .light */
@@ -306,24 +284,7 @@ ul.highlight li.on { background: var(--color-lime); border-radius: var(--radius-
   opacity: 0.45;
 }
 
-.ftr .placeholder { border-color: rgba(255,255,255,.5); color: rgba(255,255,255,.85); }
-.ftr .placeholder b { color: rgba(255,255,255,.7); }
-
-.ftr.lime { background: var(--color-lime); color: var(--color-forest); }
-.ftr.black { background: var(--color-black); color: var(--color-white); }
-.ftr.light { background: var(--color-white); color: var(--color-ink); }
-
-.ftr.minimal { flex-basis: var(--footer-minimal); height: var(--footer-minimal); }
-
-.ftr.legal {
-  flex-basis: var(--footer-legal);
-  height: var(--footer-legal);
-  align-items: flex-start;
-  padding-top: var(--space-md);
-  background: var(--color-white);
-  color: var(--color-ink);
-}
-.ftr.legal.with-image { flex-basis: var(--footer-legal-image); height: var(--footer-legal-image); }
+.ftr .ftr.legal.with-image { flex-basis: var(--footer-legal-image); height: var(--footer-legal-image); }
 .ftr.legal .indications { font-size: 7pt; line-height: 9.5pt; color: var(--color-ink-soft); max-width: 62%; }
 .ftr.legal .qr { flex: 0 0 auto; width: 68pt; height: 68pt; }
 
