@@ -1,0 +1,29 @@
+{
+  "$comment": "Snap to this scale. Arbitrary padding values are how a set of documents stops looking like one system.",
+  "scale": {
+    "xs": 6,
+    "sm": 9,
+    "md": 18
+  },
+  "usage": {
+    "6": "table cell padding, tight internal gaps",
+    "9": "component-internal gaps, pill padding",
+    "18": "page margin, section gaps"
+  },
+  "radius": {
+    "card": 9,
+    "pill": 999,
+    "button": 7
+  },
+  "bullet": {
+    "$comment": "Derived, not guessed: inset + dot + gap.",
+    "inset": 6,
+    "dot": 8,
+    "gap": 9,
+    "indent": 23
+  },
+  "rules": {
+    "hairline": 1
+  },
+  "$radiusNote": "Card radius is 9, not larger. Containers frequently sit side by side and a big radius reads badly when two rounded edges meet."
+}

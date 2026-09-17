@@ -1,0 +1,14 @@
+{
+  "$comment": "Modelled on the approved Clinical Application family (figma/components.json -> approvedDocuments.clinicalApplication).",
+  "name": "Clinical application sheet",
+  "pages": [
+    { "role": "front", "header": "standard", "footer": "standard",
+      "blocks": ["section", "bullets", "spacer", "rule", "card"] },
+    { "role": "back", "header": "compact", "footer": "standard",
+      "blocks": ["features", "card", "card", "spacer", "refs", "placeholder"] }
+  ],
+  "notes": [
+    "The highlighted-bullet marker never ships without its legend row.",
+    "References are preserved verbatim; an uncited entry is an editorial question for the author, not something to silently drop."
+  ]
+}

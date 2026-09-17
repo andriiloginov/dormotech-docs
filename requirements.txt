@@ -1,0 +1,8 @@
+# Three packages, one language. Everything else is the standard library.
+#
+#   pip install -r requirements.txt
+#   playwright install chromium
+#
+playwright>=1.40    # renders the HTML to PDF via headless Chromium
+fonttools>=4.50     # glyph-coverage check against the real font file
+pypdf>=4.0          # page-box and embedded-font check on the finished PDF

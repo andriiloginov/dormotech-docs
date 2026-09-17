@@ -1,0 +1,335 @@
+/* Dormotech document components.
+ *
+ * Every class here corresponds to a real component in the Figma library
+ * (section 2463:4746). Compose documents from these — do not hand-write a
+ * lookalike rectangle in a template.
+ *
+ * Colours and sizes come from styles/tokens.css (generated from tokens/*.json).
+ * Never write a raw hex or a raw size in this file or in a template.
+ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page { margin: 0; }
+
+body {
+  font-family: var(--font-family);
+  color: var(--color-ink);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------------------------------------------- page --
+ * Geometry is the ONLY thing that differs between the two formats.
+ * Everything below is format-agnostic and reflows inside whichever box it
+ * is given — which is what makes the A4/US pair a re-layout rather than a
+ * scale. */
+
+.page {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  page-break-after: always;
+}
+.page:last-child { page-break-after: auto; }
+
+.page.a4 { width: var(--page-a4-width); height: var(--page-a4-height); }
+.page.us { width: var(--page-us-width); height: var(--page-us-height); }
+
+/* -------------------------------------------------------------- header --
+ * Variants: .compact (no subheader) | default (with subheader) | .split
+ * Themes:   default (light tint)    | .dark
+ * Pick one theme per document and hold it. */
+
+/* The header ground is plain white. The tinted and dark grounds exist as
+ * opt-in variants — apply one deliberately, never by default. */
+.hdr {
+  background: var(--color-white);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.hdr.tint { background: var(--color-header-tint); }
+.hdr.dark {
+  background: linear-gradient(160deg, #17514E, var(--color-forest));
+  color: var(--color-white);
+}
+
+.hdr-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+
+/* The eyebrow chip is lime — it is the one accent moment at the top of a
+ * document, and the only reason the page needs an accent up there at all. */
+.pill {
+  background: var(--color-lime);
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm);
+  font-weight: var(--type-eyebrow-weight);
+  font-size: var(--type-eyebrow-size);
+  line-height: var(--type-eyebrow-line);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--color-forest);
+  white-space: nowrap;
+}
+
+.hdr h1 {
+  font-weight: var(--type-h1-weight);
+  font-size: var(--type-h1-size);
+  line-height: var(--type-h1-line);
+  letter-spacing: var(--type-h1-tracking);
+  text-wrap: balance;
+}
+
+.hdr .sub {
+  font-weight: var(--type-subheader-weight);
+  font-size: var(--type-subheader-size);
+  line-height: var(--type-subheader-line);
+  opacity: var(--type-subheader-opacity);
+}
+
+/* .split — H1 left, intro paragraph right (the Technical Overview header) */
+.hdr.split .hdr-cols { display: flex; gap: var(--space-md); align-items: flex-start; }
+.hdr.split .hdr-cols > * { flex: 1 1 0; min-width: 0; }
+
+/* ------------------------------------------------------------ wordmark --
+ * The TYPE part of the logo only — no symbol.
+ *
+ * Two brand rules are encoded here and neither is configurable:
+ *   1. documents carry NO logo in the header;
+ *   2. the footer carries the wordmark without the symbol.
+ * There is deliberately no `.hdr .wordmark` rule — adding one would put a
+ * logo back at the top. */
+.wordmark {
+  font-weight: 700;
+  font-size: 15pt;
+  letter-spacing: -0.3pt;
+  color: inherit;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- body -- */
+
+.body {
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Flex children shrink by default. Without this a block can be squeezed to
+ * zero height while the page still reports that it fits — which is how a
+ * compliance block once disappeared from a finished PDF. */
+.body > * { flex: 0 0 auto; }
+
+/* Pushes everything after it to the bottom of the body. Deliberately zero
+ * height — the collapse check in scripts/build.mjs skips it by class. */
+.spacer { margin-top: auto; }
+
+/* --------------------------------------------------------------- text -- */
+
+.section-head {
+  font-weight: var(--type-section-weight);
+  font-size: var(--type-section-size);
+  line-height: var(--type-section-line);
+  letter-spacing: var(--type-section-tracking);
+}
+.lead {
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  color: var(--color-ink-soft);
+  margin-top: var(--space-xs);
+}
+hr.rule { height: var(--rule-hairline); background: var(--color-rule); border: 0; }
+
+sup {
+  font-size: 0.62em;
+  vertical-align: super;
+  line-height: 0;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------ bullets -- */
+
+ul { list-style: none; }
+
+li {
+  position: relative;
+  padding-left: var(--bullet-indent);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+}
+li::before {
+  content: '';
+  position: absolute;
+  left: var(--bullet-inset);
+  top: 6pt;
+  width: var(--bullet-dot);
+  height: var(--bullet-dot);
+  border-radius: 50%;
+  background: var(--color-forest);
+}
+li + li { margin-top: var(--space-sm); }
+
+/* Bullet dots are always forest green. Lime belongs to the eyebrow chip and
+ * to the highlight treatment below — a lime dot on an ordinary list spends
+ * the accent on something that carries no meaning. */
+
+/* Highlighted bullet: the marker sits in a wrapper. It NEVER ships without
+ * the legend row below explaining what highlighting means — that pairing is
+ * part of the component, not a layout choice. */
+ul.highlight li.on { background: var(--color-lime); border-radius: var(--radius-pill); padding-right: var(--space-sm); }
+.legend { display: flex; gap: var(--space-sm); align-items: flex-start; font-size: var(--type-dense-size); line-height: var(--type-dense-line); color: var(--color-ink-soft); }
+.legend::before { content: ''; flex: 0 0 auto; width: var(--bullet-dot); height: var(--bullet-dot); border-radius: 50%; background: var(--color-lime); margin-top: 4pt; }
+
+/* -------------------------------------------------------------- cards -- */
+
+.card { border-radius: var(--radius-card); padding: 9pt 14pt; }
+
+/* A list inside a card is a denser context than a page-level list — it is
+ * summary material, not primary reading. Without this rule an "at a glance"
+ * card renders at page body size and pushes a two-page document to three. */
+.card li { font-size: 11pt; line-height: 13pt; padding-left: 19pt; }
+.card li::before { left: 3pt; top: 3.5pt; width: 7pt; height: 7pt; }
+.card li + li { margin-top: 4pt; }
+.card.mint { background: var(--color-mint); }
+.card.sand { background: var(--color-sand); }
+.card.gray { background: var(--color-gray); }
+.card.lime { background: var(--color-lime); }
+.card.forest { background: var(--color-forest); color: var(--color-white); }
+.card .section-head { font-size: 14pt; line-height: 19pt; }
+
+/* When a card introduces feature blocks, its intro paragraph sits with them
+ * rather than at page body size — otherwise it reads as a louder voice
+ * inside its own card. When the paragraph IS the card's content, it stays at
+ * body size: shrinking it there just makes the page's main text small. */
+.card:has(.feat) > .lead {
+  font-size: var(--type-dense-size);
+  line-height: var(--type-dense-line);
+}
+
+/* ----------------------------------------------------- feature blocks -- */
+
+.feat h3 {
+  font-weight: var(--type-feature-weight);
+  font-size: var(--type-feature-size);
+  line-height: var(--type-feature-line);
+}
+.feat p {
+  font-size: var(--type-dense-size);
+  line-height: var(--type-dense-line);
+  color: var(--color-ink-soft);
+  margin-top: 2pt;
+}
+.feat + .feat { margin-top: var(--space-xs); padding-top: var(--space-xs); border-top: var(--rule-hairline) solid var(--color-rule); }
+.card .feat + .feat { border-top-color: var(--color-rule-on-card); }
+
+/* ------------------------------------------------------------ columns -- */
+
+.cols2 { display: flex; gap: var(--space-md); align-items: flex-start; }
+.cols2 > * { flex: 1 1 0; min-width: 0; }
+
+/* Side-by-side feature blocks are COLUMNS, not a stack — no rule above the
+ * second one. Without this the divider renders across the top of the right
+ * column and reads as a mistake. */
+.cols2 > .feat + .feat { margin-top: 0; padding-top: 0; border-top: 0; }
+
+/* --------------------------------------------------------- references -- */
+
+.refs .label {
+  font-weight: 700;
+  font-size: 8.5pt;
+  letter-spacing: 0.9pt;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.refs .grid { display: flex; gap: 14pt; margin-top: var(--space-xs); }
+.refs .grid p { flex: 1 1 0; font-size: var(--type-reference-size); line-height: var(--type-reference-line); color: var(--color-ink-soft); }
+.refs .n { font-weight: 700; color: var(--color-forest); }
+
+/* -------------------------------------------------------- placeholder --
+ * For content that MUST come from the live component or the brand owner and
+ * is not yet available — regulatory wording above all. Deliberately visible:
+ * a missing compliance block should be obvious in the render, never silent. */
+
+.placeholder {
+  border: var(--rule-hairline) dashed var(--color-rule-strong);
+  border-radius: var(--radius-button);
+  padding: 5pt 8pt;
+  color: var(--color-ink-soft);
+  font-size: 7.5pt;
+  line-height: 10pt;
+}
+.placeholder b {
+  display: block;
+  font-size: 7pt;
+  letter-spacing: 0.9pt;
+  text-transform: uppercase;
+  margin-bottom: 1pt;
+  opacity: 0.75;
+}
+
+/* -------------------------------------------------------------- footer --
+ * Heights: .minimal 30 | default 52 | .legal 132 | .legal.with-image 146
+ * Themes:  default forest | .lime | .black | .light */
+
+/* Three groups running left to right on an even gap — wordmark, stat,
+ * regulatory strip — matching the approved footer (Figma 2561:4917, 52pt:
+ * wordmark at x=18, stat at x=175, strip at x=347). NOT a wordmark on the
+ * left with something pushed against the right edge. */
+.ftr {
+  flex: 0 0 var(--footer-standard);
+  height: var(--footer-standard);
+  padding: 0 var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-md);
+  background: var(--color-forest);
+  color: var(--color-white);
+}
+
+.ftr .stat { display: flex; align-items: baseline; gap: var(--space-xs); }
+.ftr .stat .value { font-weight: 700; font-size: 18pt; letter-spacing: -0.3pt; }
+.ftr .stat .caption { font-size: 7.5pt; line-height: 9.5pt; max-width: 86pt; opacity: 0.85; }
+
+.ftr .strip { display: flex; align-items: center; gap: 10pt; font-size: 8.5pt; }
+.ftr .strip .sep {
+  display: inline-block;
+  width: var(--rule-hairline);
+  height: 12pt;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.ftr .placeholder { border-color: rgba(255,255,255,.5); color: rgba(255,255,255,.85); }
+.ftr .placeholder b { color: rgba(255,255,255,.7); }
+
+.ftr.lime { background: var(--color-lime); color: var(--color-forest); }
+.ftr.black { background: var(--color-black); color: var(--color-white); }
+.ftr.light { background: var(--color-white); color: var(--color-ink); }
+
+.ftr.minimal { flex-basis: var(--footer-minimal); height: var(--footer-minimal); }
+
+.ftr.legal {
+  flex-basis: var(--footer-legal);
+  height: var(--footer-legal);
+  align-items: flex-start;
+  padding-top: var(--space-md);
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+.ftr.legal.with-image { flex-basis: var(--footer-legal-image); height: var(--footer-legal-image); }
+.ftr.legal .indications { font-size: 7pt; line-height: 9.5pt; color: var(--color-ink-soft); max-width: 62%; }
+.ftr.legal .qr { flex: 0 0 auto; width: 68pt; height: 68pt; }
+
+/* --------------------------------------------------------------- outro --
+ * Deliberately near-empty: a large ellipse with the logo/tagline lockup over
+ * it. Do not fill it with content. */
+
+.page.outro { background: var(--color-forest); align-items: center; justify-content: center; }
+.page.outro .mark { color: var(--color-white); text-align: center; }

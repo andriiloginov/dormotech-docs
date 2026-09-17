@@ -1,0 +1,82 @@
+{
+  "$comment": "Cached map of the Figma component library. This file exists because the Figma plan allows only 20 read calls per MONTH on Starter (200/day on Professional with a Dev or Full seat) — rediscovering these ids costs real quota, so do not delete this as redundant. Each entry carries the layer NAME as well as the id: ids break when a component is rebuilt rather than moved, and a lookup should fall back to resolving by name instead of failing.",
+  "fileKey": "RZX5zb9PgiLIyERoZUpPUZ",
+  "fileName": "Dormotech - design",
+  "scannedAt": "2026-09-17",
+  "sections": {
+    "components": { "id": "2463:4746", "name": "Components" },
+    "approvedDocs": { "id": "2561:5183", "name": "Docs" },
+    "docsToScan": { "id": "2702:1279", "name": "Docs to scan" },
+    "brandGuide": { "id": "470:507", "name": "💅 Handoff" }
+  },
+  "brandGuide": {
+    "palette": "1155:12987",
+    "rule603010": "1155:13049",
+    "typeface": "1155:13071",
+    "gradient": "1155:16135",
+    "tints": "1155:16165",
+    "elements": ["1155:13111", "1155:15340"]
+  },
+  "approvedDocuments": {
+    "$comment": "Signed-off references. Every family exists complete in BOTH formats.",
+    "technicalOverview": {
+      "intro": { "a4": "2561:4858", "us": "2657:811" },
+      "page01": { "a4": "2561:3969", "us": "2561:4475" },
+      "page02": { "a4": "2561:4156", "us": "2561:4661" },
+      "outro": { "a4": "2561:5164", "us": "2561:4757" }
+    },
+    "clinicalApplication": {
+      "intro": { "a4": "2657:1167", "us": "2657:903" },
+      "front": { "a4": "2561:4945", "us": "2561:4252" },
+      "back": { "a4": "2561:5081", "us": "2561:4775" }
+    }
+  },
+  "components": {
+    "layout": { "id": "2357:6065", "name": "Layout", "size": [612, 792], "note": "header slot + body instance-swap slot + footer slot" },
+    "bodySlot": { "id": "2357:6235", "name": "Body", "note": "instance-swap symbol" },
+    "header": [
+      { "id": "2357:4114", "name": "Header", "size": [612, 113], "variant": "compact" },
+      { "id": "2357:4477", "name": "Header", "size": [612, 113], "variant": "compact" },
+      { "id": "2357:3038", "name": "Header", "size": [612, 188], "variant": "standard" },
+      { "id": "2357:3045", "name": "Header", "size": [612, 188], "variant": "standard" },
+      { "id": "2352:1922", "name": "Header", "size": [612, 188], "variant": "standard" },
+      { "id": "2352:1928", "name": "Header", "size": [612, 188], "variant": "standard" },
+      { "id": "2357:3059", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2357:3052", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2357:4107", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2357:4470", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2357:4120", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2357:4483", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2357:5047", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2357:5052", "name": "Header", "size": [612, 196], "variant": "tall" },
+      { "id": "2468:4748", "name": "Header", "size": [595, 180], "variant": "split", "note": "A4 width; H1 left, intro paragraph right" }
+    ],
+    "footer": [
+      { "id": "2352:1695", "name": "Footer", "size": [612, 30], "variant": "minimal" },
+      { "id": "2352:1524", "name": "Footer", "size": [612, 30], "variant": "minimal" },
+      { "id": "2352:1526", "name": "Footer", "size": [612, 30], "variant": "minimal" },
+      { "id": "2415:1351", "name": "Footer", "size": [612, 52], "variant": "standard" },
+      { "id": "2415:1375", "name": "Footer", "size": [612, 52], "variant": "standard" },
+      { "id": "2415:1934", "name": "Footer", "size": [595, 52], "variant": "standard", "note": "A4 width" },
+      { "id": "2357:3576", "name": "Footer", "size": [612, 132], "variant": "legal" },
+      { "id": "2352:1136", "name": "Footer", "size": [612, 132], "variant": "legal" },
+      { "id": "2352:1252", "name": "Footer", "size": [612, 132], "variant": "legal" },
+      { "id": "2352:1310", "name": "Footer", "size": [612, 132], "variant": "legal" },
+      { "id": "2357:3515", "name": "Footer", "size": [613, 146], "variant": "legalImage" }
+    ],
+    "bodyPatterns": [
+      { "id": "2415:2151", "name": "Configs", "size": [541, 146], "pattern": "stat comparison card, formula figures" },
+      { "id": "2415:1874", "name": "Configs", "size": [559, 190], "pattern": "spec definition list, 64pt label column" },
+      { "id": "2415:2168", "name": "Table", "size": [541, 106], "pattern": "four-column comparison table, 6pt cell padding" },
+      { "id": "2425:2745", "name": "2ColumnBullets", "size": [612, 118], "pattern": "at-a-glance summary" },
+      { "id": "2425:2738", "name": "Refs", "size": [612, 84], "pattern": "references, three columns" },
+      { "id": "2357:4672", "name": "Body", "size": [612, 574], "pattern": "category column list" },
+      { "id": "2352:1808", "name": "Body", "size": [612, 588], "pattern": "category column list" },
+      { "id": "2357:4776", "name": "Container", "pattern": "highlighted-bullet legend row — never ships without its highlighted bullets" }
+    ]
+  },
+  "resolution": {
+    "strategy": "Try the id first. On a miss, search the components section for a layer with the recorded name and the recorded size, then update this file with the new id in the same commit.",
+    "note": "Moving or renaming a component in Figma preserves its id. Rebuilding or copy-pasting one does not."
+  }
+}

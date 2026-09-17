@@ -1,0 +1,14 @@
+{
+  "$comment": "The three status labels that run along the standard footer, separated by thin vertical rules. Sourced from the live Figma text nodes inside the approved footer 2561:4917 (A4/Intro, Docs section) — NOT retyped from memory and not read off an exported PDF, whose text layer can be corrupt. Each label is reproduced verbatim; changing one requires review per .github/CODEOWNERS.",
+  "status": "sourced",
+  "source": {
+    "figmaNode": "2561:4917",
+    "nodes": { "Rx only": "2561:4936", "FDA-cleared, 6+": "2561:4938", "CE Mark pending": "2561:4940" },
+    "readAt": "2026-09-17",
+    "note": "Figma layer names appear to truncate around 31 characters. All three labels are well under that, so they are complete. Anything longer read this way must be re-verified against the live node before use."
+  },
+  "effectiveDate": null,
+  "approvedBy": null,
+  "labels": ["Rx only", "FDA-cleared, 6+", "CE Mark pending"],
+  "separator": "rule"
+}

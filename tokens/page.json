@@ -1,0 +1,26 @@
+{
+  "$comment": "Every document ships in BOTH formats. Producing one is an incomplete deliverable. The pair is a RE-LAYOUT, not a scale: A4 is 17pt narrower and 50pt taller than US Letter, so content redistributes between them. Verified against the approved Technical Overview, where A4/01's right column is a single 184x594 block while US/01 splits the same content into 184x216 + 184x339.",
+  "formats": {
+    "a4": {
+      "label": "A4",
+      "width": 595, "height": 842,
+      "margin": 18,
+      "contentWidth": 559,
+      "pdf": { "width": "210mm", "height": "297mm" }
+    },
+    "us": {
+      "label": "US Letter",
+      "width": 612, "height": 792,
+      "margin": 18,
+      "contentWidth": 576,
+      "pdf": { "width": "8.5in", "height": "11in" }
+    }
+  },
+  "units": {
+    "note": "Figma units map 1:1 to CSS pt here. Playwright's page.pdf() REJECTS pt for width/height — pass the inch/mm values above."
+  },
+  "chrome": {
+    "footerHeights": { "minimal": 30, "standard": 52, "legal": 132, "legalImage": 146 },
+    "headerHeights": { "compact": 113, "standard": 188, "tall": 196, "split": 180 }
+  }
+}

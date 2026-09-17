@@ -1,0 +1,84 @@
+{
+  "$comment": "Instrument Sans only. There is no second family in this system — do not introduce one for emphasis. Sizes are in pt and map 1:1 to the px values in Figma (a 612-unit-wide Figma frame is a 612pt-wide US Letter page).",
+  "family": {
+    "name": "Instrument Sans",
+    "fallback": "system-ui, -apple-system, sans-serif",
+    "license": "SIL Open Font License",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "source": "npm @fontsource/instrument-sans — see assets/fonts/README.md"
+  },
+  "scale": {
+    "eyebrow": {
+      "weight": 700,
+      "size": 9,
+      "tracking": 1.08,
+      "lineHeight": 12,
+      "uppercase": true
+    },
+    "h1": {
+      "weight": 700,
+      "size": 24,
+      "tracking": -0.48,
+      "lineHeight": 32
+    },
+    "subheader": {
+      "weight": 600,
+      "size": 13,
+      "lineHeight": 18,
+      "opacity": 0.75
+    },
+    "sectionHead": {
+      "weight": 700,
+      "size": 17,
+      "tracking": -0.2,
+      "lineHeight": 22
+    },
+    "body": {
+      "weight": 400,
+      "size": 13.5,
+      "lineHeight": 19
+    },
+    "dense": {
+      "weight": 400,
+      "size": 9.5,
+      "lineHeight": 11.5,
+      "note": "multi-block pages only"
+    },
+    "featureHead": {
+      "weight": 700,
+      "size": 11.5,
+      "lineHeight": 14
+    },
+    "caption": {
+      "weight": 400,
+      "size": 12
+    },
+    "reference": {
+      "weight": 400,
+      "size": 7,
+      "lineHeight": 9.5
+    },
+    "display": {
+      "weight": 700,
+      "size": 32,
+      "note": "stat figures; scales up freely"
+    }
+  },
+  "casing": {
+    "uppercase": [
+      "eyebrow",
+      "small labels"
+    ],
+    "sentenceCase": [
+      "h1",
+      "sectionHead",
+      "featureHead"
+    ],
+    "note": "Source documents often arrive in ALL CAPS. Normalising headings to sentence case is correct — uppercase is reserved for the eyebrow pill."
+  }
+}

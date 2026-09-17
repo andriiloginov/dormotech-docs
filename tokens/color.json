@@ -1,0 +1,36 @@
+{
+  "$comment": "Source of truth for every colour in a Dormotech document. Values audited from the Figma brand guide (canvas 470:507, Palette 1155:12987). Never write a hex in a template or a stylesheet — add it here and regenerate styles/tokens.css.",
+  "palette": {
+    "forest":  { "hex": "#103736", "name": "Deep Forest Green", "role": "anchor: footers, dark cards, headline text" },
+    "lime":    { "hex": "#AFEA00", "name": "Electric Lime",     "role": "the pulse: data, CTAs, highlight callouts, lime footer theme" },
+    "teal":    { "hex": "#009370", "name": "Teal Oasis",        "role": "supporting mid-value" },
+    "mint":    { "hex": "#BCE1CF", "name": "Mint Whisper",      "role": "quiet supporting tint, card fills" },
+    "gray":    { "hex": "#D3D3D3", "name": "Dormotech Gray",    "role": "neutral cards, rules" },
+    "sand":    { "hex": "#F2E4D9", "name": "Soft Sand Dune",    "role": "warm neutral card fill" },
+    "black":   { "hex": "#1E1B19", "name": "Black",             "role": "true near-black — not #000" },
+    "white":   { "hex": "#FFFFFF", "name": "White",             "role": "base" }
+  },
+  "chrome": {
+    "headerTint": { "hex": "#D7F4F3", "role": "light header ground — a ninth value, not one of the eight palette swatches" }
+  },
+  "derived": {
+    "$comment": "Opacity tints of forest green. These are decisions, not accidents — keep them here so a template never invents its own.",
+    "inkSoft": "rgba(16,55,54,.80)",
+    "inkMuted": "rgba(16,55,54,.66)",
+    "rule": "rgba(16,55,54,.16)",
+    "ruleOnCard": "rgba(16,55,54,.22)",
+    "ruleStrong": "rgba(16,55,54,.45)"
+  },
+  "usageRule": {
+    "name": "60/30/10",
+    "base": ["white", "sand", "gray"],
+    "supporting": ["forest", "teal", "mint"],
+    "accent": ["lime", "forest", "black"],
+    "note": "Audit the ratio over the BODY of a page. A footer band is chrome — a full-lime footer is a named theme, not a violation."
+  },
+  "themes": {
+    "$comment": "Headers and footers exist as light and dark twins in the Figma library. Pick one per document and hold it.",
+    "header": ["light", "dark"],
+    "footer": ["light", "forest", "black", "green", "lime"]
+  }
+}

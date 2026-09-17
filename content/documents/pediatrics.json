@@ -1,0 +1,151 @@
+{
+  "id": "pediatrics",
+  "title": "DormoVision X™ for Pediatric Sleep Diagnostics",
+  "eyebrow": "For Pediatrics",
+  "recipe": "clinical-application",
+  "theme": {
+    "header": "light",
+    "footer": "forest"
+  },
+  "$comment": "Citation markers are written [^1], never as ¹ — see scripts/check-glyphs.py. Per-format values like columns:{a4,us} encode a genuine re-layout between the two page sizes, not a scale.",
+  "pages": [
+    {
+      "role": "front",
+      "header": {
+        "title": "DormoVision X™ for Pediatric Sleep Diagnostics",
+        "subtitle": "DormoVision X™ brings diagnostic polysomnography into the home and the lab for patients ages 6+, giving clinicians flexible testing options while keeping acquisition, monitoring, scoring, interpretation, and reporting connected in one workflow."
+      },
+      "blocks": [
+        {
+          "kind": "section",
+          "heading": "The patients you see",
+          "lead": "Sleep concerns in children do not always look like sleep problems."
+        },
+        {
+          "kind": "bullets",
+          "items": [
+            "Stertor, snoring or noisy breathing during sleep",
+            "Restless or fragmented sleep",
+            "Daytime sleepiness or fatigue",
+            "Attention, behavior, or learning concerns",
+            "Suspected obstructive or other sleep-disordered breathing"
+          ]
+        },
+        {
+          "kind": "spacer"
+        },
+        {
+          "kind": "rule"
+        },
+        {
+          "kind": "card",
+          "tone": "mint",
+          "heading": "Connect symptoms to objective findings",
+          "body": "DormoVision X™ ecosystem of products help clinicians relate presenting symptoms and clinical concerns to objective overnight physiology, including EEG-based sleep staging, EOG and EMG, independent nasal and oral airflow, respiratory effort, oxygen saturation, limb movement, and separate head and body position. Type II home PSG and attended Type I in-lab PSG are managed through the same platform, supporting a consistent diagnostic workflow across care settings."
+        }
+      ],
+      "footer": {
+        "variant": "standard"
+      }
+    },
+    {
+      "role": "back",
+      "header": {
+        "title": "Why DormoVision X™ for pediatric sleep care?"
+      },
+      "blocks": [
+        {
+          "kind": "features",
+          "columns": 2,
+          "items": [
+            {
+              "head": "Diagnostic PSG in the setting that fits the patient",
+              "body": "DormoVision X™ supports Type II home PSG and attended Type I in-lab PSG, giving clinicians flexibility in where diagnostic evaluation takes place without moving to a separate testing ecosystem."
+            },
+            {
+              "head": "Comprehensive PSG with less patient burden",
+              "body": "Wireless, cannula-free recording reduces traditional PSG hardware on the patient and allows Type II PSG to be performed in the child's own sleep environment when appropriate. This may be particularly relevant for children who have difficulty tolerating nasal prongs, extensive wiring, or an overnight lab study."
+            },
+            {
+              "head": "Live monitoring, where the study happens",
+              "body": "Technicians can monitor studies and review signal quality in real time during both home and attended in-lab PSG, helping identify signal issues while the recording is still in progress."
+            },
+            {
+              "head": "Measuring beyond a single night",
+              "body": "Multi-night home recording gives clinicians the option to collect additional nights when more data is needed, without requiring another overnight lab visit."
+            },
+            {
+              "head": "One workflow at home and at the lab",
+              "body": "Home and in-lab studies are managed through the same DormoVision X™ Platform, keeping acquisition, monitoring, scoring, interpretation, and reporting connected across care settings."
+            }
+          ]
+        },
+        {
+          "kind": "card",
+          "tone": "mint",
+          "heading": "Why this matters",
+          "body": "Published pediatric evidence supports both sides of this approach: PSG remains the reference method for objective evaluation when pediatric OSA is suspected, while carefully selected home testing pathways can provide useful diagnostic information outside the lab.",
+          "blocks": [
+            {
+              "kind": "features",
+              "columns": {
+                "a4": 1,
+                "us": 2
+              },
+              "items": [
+                {
+                  "head": "Alternative tests do not replace PSG",
+                  "body": "A systematic review of pediatric OSA diagnostic approaches found limited evidence supporting alternatives to polysomnography, reinforcing the importance of objective physiologic assessment when OSA is suspected.[^1]"
+                },
+                {
+                  "head": "Home testing showed high specificity for clinically significant OSA",
+                  "body": "In a prospective pediatric pilot study, home sleep apnea testing demonstrated relatively high specificity for identifying clinically significant OSA in the studied population, supporting carefully selected home testing pathways.[^2]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "card",
+          "tone": "sand",
+          "heading": "DormoVision X™ at a glance",
+          "blocks": [
+            {
+              "kind": "bullets",
+              "columns": 2,
+              "items": [
+                "Home + In-Lab PSG",
+                "FDA-cleared for ages 6+",
+                "Live technician monitoring",
+                "Multi-night recording",
+                "EEG-based sleep staging",
+                "App-guided home setup",
+                "One connected platform"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "spacer"
+        },
+        {
+          "kind": "refs",
+          "items": [
+            "Lanzlinger D, et al. Tolerance of polysomnography in children with neurodevelopmental disorders compared to neurotypical peers. J Clin Sleep Med. 2023;19(9):1625-1631. doi:10.5664/jcsm.10626.",
+            "Withers A, et al. Comparison of home ambulatory type 2 polysomnography with in-laboratory type 1 polysomnography for the diagnosis of obstructive sleep apnea in children. J Clin Sleep Med. 2022;18(2):393-402. doi:10.5664/jcsm.9576.",
+            "Russo K, Greenhill J, Burgess S. Home Level 2 polysomnography is feasible in children with suspected sleep disorders. Sleep Med. 2021;88:157-161. doi:10.1016/j.sleep.2021.10.024."
+          ]
+        },
+        {
+          "kind": "placeholder",
+          "label": "FDA disclaimer block — pending",
+          "note": "Empty in the source material. Must be reproduced verbatim from content/regulatory/indications.md or the Figma legal footer component — never drafted here."
+        }
+      ],
+      "footer": {
+        "variant": "standard",
+        "strip": null
+      }
+    }
+  ]
+}

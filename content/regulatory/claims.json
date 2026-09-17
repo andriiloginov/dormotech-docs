@@ -1,0 +1,14 @@
+{
+  "$comment": "PLACEHOLDER — not yet sourced. Each clinical claim is tied to the study it came from and the product/population it describes. A claim is never carried into a document just because the layout has a slot for it: check `appliesTo` before placing one.",
+  "status": "pending",
+  "claims": [
+    {
+      "id": "agreement-attended-psg",
+      "value": null,
+      "caption": null,
+      "appliesTo": [],
+      "source": null,
+      "note": "Seen on Technical Overview and Clinical Application footers. Do NOT place on a document whose population or product it does not cover."
+    }
+  ]
+}
