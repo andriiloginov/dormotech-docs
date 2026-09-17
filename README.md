@@ -27,6 +27,29 @@ PNG of every page.
 The token CSS is generated in memory at build time rather than committed, so
 there is no generated file to keep in sync.
 
+## The skill
+
+`.claude/skills/dormotech-documents/SKILL.md` is the canonical copy of the
+Claude skill that builds these documents. It lives here, beside the components
+it describes, so a component change and the instruction describing it move in
+the same commit and get reviewed together.
+
+**There are two copies, and only one of them triggers where.** Working inside
+this repository with Claude Code, the file above is live — edit it and the
+next run uses it. Outside the repository (a Cowork session, a chat), what
+triggers is the copy saved in the account's own skill list. That copy does not
+update itself.
+
+So when the skill changes: edit it here, review it in the pull request, then
+re-save it to the account from the file. Doing it the other way round loses the
+history.
+
+## Where documents live
+
+`content/documents/*.json` is the document — always committed, and the thing
+whose diff is worth reading. Built PDFs are not committed; see
+`releases/README.md`.
+
 ## Decide this first
 
 **Which side is the source of truth — this repo, or the Figma file?**
@@ -59,6 +82,8 @@ to infer it from the folder structure.
 | `recipes/` | Which components each document type is made of. |
 | `figma/` | Cached map of the Figma library and the approved references. |
 | `assets/` | The font files, committed. |
+| `.claude/skills/` | The Claude skill, canonical copy — see above. |
+| `releases/` | Approved PDFs. Build output goes to `dist/`, which is ignored. |
 
 ## Rules that are not obvious
 
